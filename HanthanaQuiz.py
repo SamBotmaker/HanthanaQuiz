@@ -1,9 +1,20 @@
+import os
 from telegram import Update
 from telegram.ext import Updater, CommandHandler, CallbackContext
 from telegram import ChatMember
+import logging
 
-# Replace with your Bot Token
-TOKEN = '7561358954:AAE2iHRcxpTl_vi5acNzpzG3pnAlmxO-3fY'
+# Enable logging to see if there are any issues
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                    level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+# Fetch the bot token from environment variables
+TOKEN = os.getenv('BOT_TOKEN')  # This will get the token from Vercel's environment variables
+
+if not TOKEN:
+    logger.error("Bot token is missing!")
+    exit()
 
 # Function to check if the user is an admin in the group
 def is_admin(update: Update) -> bool:
@@ -42,6 +53,7 @@ def add_question(update: Update, context: CallbackContext):
         update.message.reply_text("You must be an admin to add questions.")
 
 def main():
+    """Start the bot."""
     updater = Updater(TOKEN, use_context=True)
     dispatcher = updater.dispatcher
 
@@ -50,8 +62,10 @@ def main():
     dispatcher.add_handler(CommandHandler("stopquiz", stop_quiz))
     dispatcher.add_handler(CommandHandler("addquestion", add_question))
 
-    # Start the bot
+    # Start polling to receive updates
     updater.start_polling()
+
+    # Run the bot until you press Ctrl-C
     updater.idle()
 
 if __name__ == '__main__':
