@@ -3,7 +3,7 @@ from telegram.ext import Updater, CommandHandler, CallbackContext
 from telegram import ChatMember
 
 # Replace with your Bot Token
-TOKEN = '7545359341:AAHjqQsYbZC7W3fDBgjmAacshz0_RJaMya4'
+TOKEN = '7561358954:AAE2iHRcxpTl_vi5acNzpzG3pnAlmxO-3fY'
 
 # Function to check if the user is an admin in the group
 def is_admin(update: Update) -> bool:
