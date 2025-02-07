@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "HanthanaQuiz.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "env": {
+    "BOT_TOKEN": "@7545359341:AAHjqQsYbZC7W3fDBgjmAacshz0_RJaMya4"
+  }
+}
